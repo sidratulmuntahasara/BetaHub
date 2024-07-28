@@ -1,7 +1,11 @@
 *{
-    
     overflow-x: hidden;
 }
+
+html{
+    scroll-behavior: smooth;
+}
+
 /*body formatting*/
 body {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
