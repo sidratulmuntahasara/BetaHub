@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "analytics": "^0.8.13",
+    "firebase": "^10.12.4"
+  }
+}
