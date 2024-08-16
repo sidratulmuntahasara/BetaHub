@@ -1,20 +1,19 @@
 'use client';
 import React, { useState } from 'react';
-import { Box, CssBaseline, Drawer, AppBar, Toolbar, Button, Typography, IconButton, List, ListItem, ListItemIcon, ListItemText, Divider, Avatar, Switch, Badge } from '@mui/material';
+import { Box, CssBaseline, Drawer, Button, AppBar, Toolbar, Badge, TextField, Typography, IconButton, List, ListItem, ListItemIcon, ListItemText, Divider, Avatar, Switch } from '@mui/material';
 import { Menu as MenuIcon, Dashboard as DashboardIcon, Analytics as AnalyticsIcon, Settings as SettingsIcon, Groups2, AccountCircle, Assignment as KanbanIcon, ViewCarousel, PeopleAlt, CoPresent, AutoStories, AddBusiness, ViewList, Lock } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 import { useClerk } from '@clerk/clerk-react';
 import { Line } from 'react-chartjs-2';
 import Image from 'next/image';
 import 'daisyui';
-// import { lineData } from 'app/dashboard/analytics/data';
 
 const drawerWidth = 240;
 
-const Dashboard = () => {
+const Settings = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
-  const { user } = useClerk();
+  const { user, signOut, deleteUser } = useClerk();
   const router = useRouter();
 
   const handleDrawerToggle = () => {
@@ -29,10 +28,22 @@ const Dashboard = () => {
     setDarkMode(!darkMode);
   };
 
+  const handleDeleteAccount = async () => {
+    if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+      try {
+        await deleteUser();
+        alert('Account deleted successfully.');
+        router.push('/goodbye'); // Navigate to a farewell page
+      } catch (error) {
+        console.error("Error deleting account: ", error);
+      }
+    }
+  };
+
   const drawer = (
     <div>
       <Box className='h-screen flex flex-col justify-start'>
-        <Badge badgeContent={'Beta'} color={' bg-gradient-to-tr from-purple-400 to-rose-900 '}  className='flex justify-center self-center rounded-full mt-7'>
+      <Badge badgeContent={'Beta'} color={' bg-gradient-to-tr from-purple-400 to-rose-900 '}  className='flex justify-center self-center rounded-full mt-7'>
       <Image src={'/betahub_logo.avif'} height={'80'} width={'80'} className='flex justify-center self-center rounded-full'></Image> </Badge>
       <Divider />
       <List className='flex flex-col justify-between items-start max-h-full'>
@@ -135,7 +146,7 @@ const Dashboard = () => {
   );
 
   return (
-    <Box sx={{ display: 'flex', backgroundColor: darkMode ? '#121212' : '#f5f5f5', height: '100vh', color: darkMode ? '#fff' : '#000' }}>
+    <Box sx={{ display: 'flex', backgroundColor: darkMode ? '#121212' : '#f5f5f5', height: '100vh', color: darkMode ? '#fff' : '#000'  }}>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -156,26 +167,26 @@ const Dashboard = () => {
             <MenuIcon />
           </IconButton>
           <Typography noWrap component="div" className='text-rose-500'>
-            Dashboard / <span className={darkMode ? 'text-gray-300' : 'text-gray-600'}>Analytics</span>
+            Dashboard / <span className={darkMode ? 'text-gray-300' : 'text-gray-600'}>Settings</span>
           </Typography>
         </Toolbar>
       </AppBar>
-      {/* <Navbar></Navbar> */}
-      <Box
-        component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
-      >
+      
+      {/* Navigation Drawer */}
+      <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} aria-label="mailbox folders">
         <Drawer
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true,
-          }}
+          ModalProps={{ keepMounted: true }}
           sx={{
             display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, backgroundColor: '#1a1a2e', color: '#fff' },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: drawerWidth,
+              backgroundColor: '#1a1a2e',
+              color: '#fff',
+            },
           }}
         >
           {drawer}
@@ -184,83 +195,73 @@ const Dashboard = () => {
           variant="permanent"
           sx={{
             display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, backgroundColor: '#1a1a2e', color: '#fff' },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: drawerWidth,
+              backgroundColor: '#1a1a2e',
+              color: '#fff',
+            },
           }}
           open
         >
           {drawer}
         </Drawer>
       </Box>
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          backgroundColor: darkMode ? '#121212' : '#F6FCFE',
-          color: darkMode ? '#fff' : '#000',
-          overflow: 'auto',
-        }}
-      >
-        <Toolbar />
-        <Typography variant="h5" gutterBottom className='font-bold'>
-          Good Day, {user?.firstName}!
+      <Toolbar />
+      {/* Settings Page Content */}
+      <Box sx={{ flexGrow: 1, py: 10, px: 3 }}>
+        <Typography variant="h4" gutterBottom>
+          Settings
         </Typography>
-        <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
-          {/* Card 1 */}
-          <Box className={darkMode ? "bg-gray-800 p-6 rounded-lg shadow-lg" : 'bg-slate-50 p-6 rounded-lg shadow-lg'}>
-            <Typography variant="h6" gutterBottom className={darkMode ? 'text-purple-300 font-bold' : 'text-blue-800 font-bold'}>
-              PitchCards
-            </Typography>
-            <Typography variant="body3" className={darkMode ? 'text-rose-400' : 'text-purple-700'}>
-              Prepare yourself for the Next Big Pitch! 🚀
-            </Typography>
-            <Typography variant="body2" className={darkMode ? 'text-rose-200' : 'text-purple-700'}>
-              Enhance your learning with AI-powered flashcards designed to help you pitch your ideas confidently. Customize and train yourself using our PitchCards!
-            </Typography>
-
-            {/* Interactive button to navigate to Flashcards page */}
-            <Button
-              variant="contained"
-              color={darkMode ? 'secondary' : 'primary'}
-              sx={{ mt: 2 }}
-              onClick={() => window.location.href = '/flashcards'}
-            >
-              Explore PitchCards
-            </Button>
-
-            {/* Optionally, include an image */}
-            {/* <Box sx={{ mt: 2 }}>
-              <Image 
-                src={darkMode ? '/pitchcards_dark.jpg' : '/pitchcards_light.jpg'} 
-                alt="PitchCards Preview" 
-                width={500} 
-                height={300} 
-                className="rounded-lg shadow-md"
-              />
-            </Box> */}
-          </Box>
-
-          {/* Card 2 */}
-          <Box className={darkMode ? "bg-gray-800 p-6 rounded-lg shadow-lg" : 'bg-slate-50 p-6 rounded-lg shadow-lg'}>
-            <Typography variant="h6" gutterBottom className={darkMode? 'text-purple-300 font-bold' : 'text-blue-800 font-bold'}>Intituively Building the Next Big Thing 🤫</Typography>
-            <Typography variant="body3" className={darkMode ? 'text-rose-200 italic font-light' : 'text-purple-700 italic font-light'}>
-              Coming Soon...</Typography>
-          </Box>
-          {/* Card 3 */}
-          {/* <Box className={darkMode ? "bg-gray-800 p-6 rounded-lg shadow-lg" : 'bg-slate-50 p-6 rounded-lg shadow-lg'}>
-            <Typography variant="h6" gutterBottom className={darkMode? 'text-rose-500 font-bold' : 'text-blue-800 font-bold'}>Card Title 3</Typography>
-            <Typography variant="body2" className={darkMode? 'text-rose-200' : 'text-purple-500'}>Description or Analytics</Typography>
-          </Box> */}
-          {/* Card 4 */}
-          {/* <Box className={darkMode ? "bg-gray-800 p-6 rounded-lg shadow-lg" : 'bg-slate-50 p-6 rounded-lg shadow-lg'}>
-            <Typography variant="h6" gutterBottom className={darkMode? 'text-rose-500 font-bold' : 'text-blue-800 font-bold'}>Sales Chart</Typography>
-            {/* <Line data={lineData} /> 
-          </Box> */}
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            maxWidth: '600px',
+            mx: 'auto',
+          }}
+        >
+          <TextField
+            label="Change Password"
+            type="password"
+            variant="outlined"
+            sx={{
+              mb: 2,
+              backgroundColor: '#2e2e2e',
+              color: '#fff',
+              input: { color: '#fff' },
+            }}
+            InputLabelProps={{ style: { color: '#aaa' } }} // Lighter label color
+            fullWidth
+          />
+          <TextField
+            label="Change Email"
+            type="email"
+            variant="outlined"
+            sx={{
+              mb: 2,
+              backgroundColor: '#2e2e2e',
+              color: '#fff',
+              input: { color: '#fff' },
+            }}
+            InputLabelProps={{ style: { color: '#aaa' } }} // Lighter label color
+            fullWidth
+          />
+          <Button variant="contained" color="primary" sx={{ mt: 2 }}>
+            Save Changes
+          </Button>
+          <Button
+            variant="outlined"
+            color="secondary"
+            sx={{ mt: 2, borderColor: '#ff1744', color: '#ff1744' }}
+            onClick={handleDeleteAccount}
+          >
+            Delete Account
+          </Button>
         </Box>
       </Box>
     </Box>
   );
 };
 
-export default Dashboard;
+export default Settings;
