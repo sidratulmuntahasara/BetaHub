@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Main from "./main/page";
-import Login from './login/[[...login]]/page';
 import { Box } from "@mui/material";
 
 export default function Home() {

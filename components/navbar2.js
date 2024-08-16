@@ -14,9 +14,9 @@ function navbar() {
             <a href='#'><Typography className='text-slate-300 hover:font-bold hover:text-white'>DOCS</Typography></a>
         </Box>
         <Box className= 'w-screen flex flex-row justify-center items-center gap-3'>
-            <Button href='/signup' variant='contained' className=' font-bold bg-transparent rounded overflow-hidden hover:bg-gradient-to-tr hover:bg-transparent hover:glass'>
+            <Button href='/login' variant='contained' className=' font-bold bg-transparent rounded overflow-hidden hover:bg-gradient-to-tr hover:bg-transparent hover:glass'>
                 
-                SIGN UP
+                SIGN IN
 
                 <span aria-hidden className='absolute inset-0 -z-10 scale-x-[2] scale-y-[2] blur before:absolute before:animate-disco before:inset-0 before:aspect-auto before:bg-gradient-conic before:from-rose-400 before:via-purple-500 before:to-teal-400' />
                 
