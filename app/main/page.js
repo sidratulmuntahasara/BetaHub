@@ -1,5 +1,6 @@
 import React from 'react'
-import {Box , Typography} from '@mui/material'
+import {Box} from '@mui/material'
+// import ScrollBtn from '@/components/scroll'
 import Navbar from '@/components/navbar'
 import Hero from '@/components/hero'
 import Section1 from '@/components/section1'
@@ -11,6 +12,7 @@ import Footer from '@/components/footer'
 function main() {
   return (
     <Box>
+      {/* <ScrollBtn /> */}
         <Navbar />
         <Hero />
         <Section1 />
