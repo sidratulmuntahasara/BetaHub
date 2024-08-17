@@ -27,6 +27,7 @@
     "react-beautiful-dnd": "^13.1.1",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18",
+    "react-intersection-observer": "^9.13.0",
     "react-kanban": "^0.0.0-test",
     "swr": "^2.2.5"
   },

@@ -1,12 +1,16 @@
 import React from 'react'
 import Image from 'next/image'
-import {Box , Typography, AppBar, Button} from '@mui/material'
+import {Box , Typography, AppBar, Button, Badge} from '@mui/material'
 
 function navbar() {
   return (
     <AppBar className='sticky w-screen flex flex-row justify-between items-center gap-4 bg-black bg-opacity-90 py-1'>
         <Box className='w-full flex flex-row justify-center items-center'>
-            <a href='#'><Image src='/BetaHub (1).png' width={120} height={120} /></a>
+            <a href='#'>
+                {/* <Badge badgeContent={'Beta'} color={' bg-gradient-to-tr from-purple-400 to-rose-900 '}  className='flex justify-center self-center rounded-full mt-2'> */}
+                <Image src='/BetaHub (1).png' width={120} height={120} />
+                {/* </Badge> */}
+                </a>
         </Box>
         <Box className='w-full flex flex-row justify-center items-center gap-10'>
             <a href='../'><Typography className='text-slate-300 hover:font-bold hover:text-white'>HOME</Typography></a>
