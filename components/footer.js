@@ -10,7 +10,7 @@ function Footer() {
       <Grid container spacing={4} className="w-11/12 max-w-6xl mx-auto">
         {/* About Section */}
         <Grid item xs={12} md={4}>
-            <Image src={'/BetaHub.avif'} width={100} height={100} className='rounded-lg' />
+            <Image src={'/BetaHub.avif'} width={80} height={80} className='rounded-lg' />
           <Typography variant="h6" className="text-purple-300 mb-4">About BetaHub</Typography>
           <Typography className="text-slate-300">
             BetaHub is a one-stop platform for turning your entrepreneurial dreams into reality. We provide AI-powered tools, mentorship, and a thriving community to help you every step of the way.
