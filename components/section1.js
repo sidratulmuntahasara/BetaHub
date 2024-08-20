@@ -51,7 +51,7 @@ function Section1() {
           </Box> 
           <Box className='w-11/12 flex flex-col items-center justify-center p-3 text-center'>
         <Typography variant="h4" className='text-slate-300 py-3 mt-5'>
-          To <span className='bg-pink-300 text-black rounded-full'>&nbsp;support&nbsp;</span> founder's like you 🫵
+          We <span className='bg-pink-300 text-black rounded-full'>&nbsp;support&nbsp;</span> founder's like you 🫵
         </Typography>
         <Typography variant="h3" className='text-slate-300 py-3'>
           <span className='bg-purple-300 text-purple-950 font-bold rounded-full'>&nbsp;World's First AI-based Startup Incubator&nbsp;</span>

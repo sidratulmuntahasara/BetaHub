@@ -62,7 +62,7 @@ function FeaturesAndPricing() {
           {features.map((feature, index) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
               <GlassCard className="text-white h-full hover:bg-indigo-900">
-              <span aria-hidden className='absolute inset-0 -z-10 scale-x-[2] scale-y-[2] blur before:absolute before:inset-0 before:aspect-auto before:bg-gradient-conic before:from-slate-800 before:via-transparent before:to-cyan-500 ' />
+              <span aria-hidden className='absolute inset-0 -z-10 scale-x-[2] scale-y-[2] blur before:absolute before:inset-0 before:aspect-auto before:bg-gradient-conic before:from-slate-800 before:via-transparent before:to-cyan-500' />
               <CardContent>
                   <Box className="flex flex-col items-center justify-center ">
                   <Typography variant="h5" className="text-teal-50 font-bold mb-2">{feature.title}</Typography>
